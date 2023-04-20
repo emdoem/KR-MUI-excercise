@@ -28,7 +28,7 @@ const useStyles = makeStyles()({
 })
 
 // keep as function and use hooks to handle 'favorite' state
-function ArticleCard() {
+function ArticleCard({ authorName, joinedDate }) {
     
   const {classes} = useStyles();
   const [isFavorite, setFavorite] = useState(false);
@@ -41,8 +41,8 @@ function ArticleCard() {
   return (
     <Card className={classes.card}>
       <CardHeader
-        title="John Doe"
-        subheader="Joined 2019-06-08"
+        title={authorName}
+        subheader={`Joined ${joinedDate}`}
         avatar={<Avatar className={classes.avatar}>JD</Avatar>}
       />
       <CardMedia
@@ -72,10 +72,14 @@ function App() {
     <div className="App">
       <CssBaseline />
       <Container>
-        <ArticleCard />
-        <ArticleCard />
-        <ArticleCard />
-        <ArticleCard />
+        <ArticleCard
+          authorName="John Doe" 
+          joinedDate="2019-06-08"
+        />
+        <ArticleCard
+          authorName="Mateusz Maj" 
+          joinedDate="bonkers!"
+        />
 
       </Container>
     </div>
