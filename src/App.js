@@ -38,12 +38,14 @@ function ArticleCard({ authorName, joinedDate }) {
     setFavorite(!isFavorite);
   }
 
+  const initials = authorName[0];
+
   return (
     <Card className={classes.card}>
       <CardHeader
         title={authorName}
         subheader={`Joined ${joinedDate}`}
-        avatar={<Avatar className={classes.avatar}>JD</Avatar>}
+        avatar={<Avatar className={classes.avatar}>{initials}</Avatar>}
       />
       <CardMedia
         className={classes.media}
@@ -55,12 +57,19 @@ function ArticleCard({ authorName, joinedDate }) {
       </CardContent>
       <CardActions>
         <IconButton>
-          <Icon className={!isFavorite || classes.activeHeart} onClick={handleHeart}>favorite</Icon>
+          <Icon 
+            className={!isFavorite || classes.activeHeart} 
+            onClick={handleHeart}
+          >favorite</Icon>
         </IconButton>
         <IconButton>
           <Icon>share</Icon>
         </IconButton>
-        <Button className={classes.readMore} variant="outlined" color="primary">Read more</Button>
+        <Button 
+          className={classes.readMore} 
+          variant="outlined" 
+          color="primary"
+        >Read more</Button>
       </CardActions>
     </Card>
   )
