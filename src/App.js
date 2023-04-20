@@ -57,7 +57,7 @@ function ArticleCard() {
         <IconButton>
           <Icon className={!isFavorite || classes.activeHeart} onClick={handleHeart}>favorite</Icon>
         </IconButton>
-        <IconButton onClick={console.log(isFavorite)}>
+        <IconButton>
           <Icon>share</Icon>
         </IconButton>
         <Button className={classes.readMore} variant="outlined" color="primary">Read more</Button>
