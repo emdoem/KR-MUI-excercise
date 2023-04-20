@@ -4,14 +4,15 @@ import Button from '@mui/material/Button';
 import { Icon, IconButton, Container, Card, CardContent, CardActions, Typography, CardHeader, Avatar, CardMedia } from '@mui/material';
 // mui replaced JSS with TSS in v5, needed to expand dependencies
 import { makeStyles } from 'tss-react/mui';
-//import { CardContent } from '@material-ui/core'; 
-// ^^^ where did this come from? Generates hook-error on compiling
+import { useState } from "react";
 
-// makeStyles needs to be 'double-called'
+
+// output of makeStyles called as a function
 const useStyles = makeStyles()({
   media: {
     height: 200
   },
+  // using !important bc of breaking changes in MUI v5 - default margin overwriting mine
   readMore: {
     marginLeft: "auto !important"
   },
@@ -20,11 +21,22 @@ const useStyles = makeStyles()({
   },
   card: {
     margin: "10px"
+  },
+  activeHeart: {
+    color: "red"
   }
 })
 
-function ArticleCard(props) {
+// keep as function and use hooks to handle 'favorite' state
+function ArticleCard() {
+    
   const {classes} = useStyles();
+  const [isFavorite, setFavorite] = useState(false);
+  
+  // define handler for heart-clicking
+  const handleHeart = () => {
+    setFavorite(!isFavorite);
+  }
 
   return (
     <Card className={classes.card}>
@@ -43,9 +55,9 @@ function ArticleCard(props) {
       </CardContent>
       <CardActions>
         <IconButton>
-          <Icon>favorite</Icon>
+          <Icon className={!isFavorite || classes.activeHeart} onClick={handleHeart}>favorite</Icon>
         </IconButton>
-        <IconButton>
+        <IconButton onClick={console.log(isFavorite)}>
           <Icon>share</Icon>
         </IconButton>
         <Button className={classes.readMore} variant="outlined" color="primary">Read more</Button>
